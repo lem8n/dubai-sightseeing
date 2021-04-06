@@ -16,6 +16,7 @@
         - "ngx-spinner": "^10.0.1"(not the latest version as there where issues)
         - "@types/lodash": "^4.14.168"
         - "ngx-cookie-service": "^11.0.2"
+        - "@kolkov/angular-editor": "^1.1.4"
     - Angular version: 11+
 
 
