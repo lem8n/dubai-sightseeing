@@ -30,10 +30,7 @@ export class BlogComponent implements OnInit {
     this.router.navigate([('/login')]);
   }
 
-  newPost() {
-    this.router.navigate([('/post')]);
-  }
-
+  // redirects the user to the sight's detail page according to the sight's id
   viewDetail(id: any) {
 
     this.sightsService.detailId = id;

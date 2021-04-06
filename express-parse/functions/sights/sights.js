@@ -2,7 +2,7 @@ const Parse = require('parse/node');
 const sharp = require('sharp');
 
 
-
+// returns the sights' information in order to populate the frontend
 const getSights = async (req, res) => {
 
   const Sights = Parse.Object.extend("DubaiSights");
@@ -10,10 +10,8 @@ const getSights = async (req, res) => {
 
   try {
     
-    sightsQuery.ascending("order");
+    sightsQuery.ascending("order"); // shorting by 'order'
     const sights = await sightsQuery.find();
-    // alert("Successfully retrieved " + sights.length + " sights.");
-    // console.log('The results are: ', sights);
 
     res.status(200).json(sights);
 
@@ -23,6 +21,7 @@ const getSights = async (req, res) => {
   }
 }
 
+// updates the sight's details inncluding photo and photoThumb
 const updateSight = async (req, res) => {
 
   const Sights = Parse.Object.extend("DubaiSights");
@@ -31,15 +30,15 @@ const updateSight = async (req, res) => {
   const updatedSight = req.body;
   const sight = await sightsQuery.get(updatedSight.id);
   try {
-    // console.log("req.body: ", updatedSight);
-
+    // det = detail(eg. title, shortInfo etc.)
     for (let det in updatedSight) {
-      // console.log("det: ", det);
+      // check if any undefined value exists in the object
       if (updatedSight[det] !== undefined) {
-        // console.log('updatedSight.det: ', updatedSight[det]);
+        // exclude the photo detail from the normal setting of the details in order to treat it defferently and build the thumbnail(photoThumb) via sharp library
         if (det !== 'photo') {
           sight.set(det, updatedSight[det]);
         } else if (det === 'photo' && updatedSight.photo !== null) {
+          // main photo procedure
           const file = new Parse.File("mainPhoto-" + updatedSight.id + ".png", { base64: updatedSight[det] }, "image/png" || "image/jpeg");
           await file.save().then(
             (response) => {
@@ -48,6 +47,7 @@ const updateSight = async (req, res) => {
             console.log('Error on loading image', error);
           });
 
+          // building the photoThumb
           const fileData = await file.getData();
           const b64File = fileData.toString('base64');
           const imageBuffer = Buffer.from(b64File, 'base64');
@@ -82,24 +82,8 @@ const updateSight = async (req, res) => {
 
 }
 
-const getSightById = async (req, res) => {
-
-  try {
-    
-    const sight = await sightsQuery.get(req.params.id);
-    // alert("Successfully retrieved " + sights.title + " sights.");
-    console.log('Fetched sight is: ', sight.title);
-
-    res.status(200).json(sight);
-
-  } catch(error) {
-    console.log("error message: ", error);
-    res.status(400).json({message: "An error oocured trying to fetch the sights."});
-  }
-}
 
 module.exports = {
   getSights,
-  getSightById,
   updateSight
 }

@@ -15,8 +15,9 @@ import * as _ from 'lodash';
 export class BlogDetailComponent implements OnInit {
 
   id: any;
-  edit: boolean = false;
+  edit: boolean = false; // enables edit mode
   blogDetail: Blog | null = null;
+  // sight's attributes initilized in order to be edited
   title: any;
   shortInfo: any;
   description: any;
@@ -25,7 +26,7 @@ export class BlogDetailComponent implements OnInit {
 
   imageError: string = '';
   isImageSaved: boolean = false;
-  cardImageBase64: string = '';
+  cardImageBase64: string = ''; // the base64 of the image file to be used to upload it and transform it via sharp to a thumbnail
 
   constructor(activatedRouter: ActivatedRoute, public sightsService: SightsService, public usersService: UsersService, public router: Router, private spinner: NgxSpinnerService) {
     this.id = activatedRouter.snapshot.paramMap.get('id');
@@ -44,6 +45,7 @@ export class BlogDetailComponent implements OnInit {
     this.router.navigate([('/login')]);
   }
 
+  // start editting the sight
   editPost() {
       this.edit = true
       this.blogDetail = this.sightsService.Blogs.filter(x => x.objectId === this.id)[0];
@@ -57,12 +59,13 @@ export class BlogDetailComponent implements OnInit {
       window.scroll(0,0);
   }
 
+  // exit editting the sight
   stopEditting() {
     this.edit = false;
     window.scroll(0,0);
   }
 
-
+  // updates the sigts's attributes in the database
   updatePost() {
     this.spinner.show();
       let sightDetails = {
@@ -82,6 +85,7 @@ export class BlogDetailComponent implements OnInit {
       );
   }
 
+  // uploads the photo of each site when you edit it
   fileChangeEvent(fileInput: any) {
     this.imageError = '';
     if (fileInput.target.files && fileInput.target.files[0]) {
@@ -124,7 +128,7 @@ export class BlogDetailComponent implements OnInit {
                 } else {
                     let imgBase64Path = e.target.result;
                     
-                    this.cardImageBase64 = imgBase64Path;
+                    this.cardImageBase64 = imgBase64Path; // the base64 of the image file
                     this.isImageSaved = true;
                     // this.previewImagePath = imgBase64Path;
                 }
@@ -139,6 +143,7 @@ export class BlogDetailComponent implements OnInit {
     return true;
   }
 
+  // removes the image selected
   removeImage() {
       this.cardImageBase64 = '';
       this.isImageSaved = false;

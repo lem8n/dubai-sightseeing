@@ -13,17 +13,19 @@ export class UsersService {
   
   User: object = {};
 
+  // calls the logIn API
   public logIn(user: any): Observable<any> {
     return this.httpClient.post('/api/users/login', user);
   }
 
+  // when the user chooses to log out, from the FE side I delete the cookies set for the session and the call the logOut API
   public logOut(): Observable<any> {
     this.cookieService.delete( 'user');
-    console.log('this.cookieServiceAfterDeletion: ', this.cookieService.get('user'));
     this.cookieService.delete( 'name');
     return this.httpClient.get('/api/users/logout');
   }
 
+  // returns the user currently logged in if any is
   public getUserFromCookies(user: any) {
     if (this.cookieService.get(user) == '') {
       return undefined;
@@ -31,6 +33,7 @@ export class UsersService {
     return this.cookieService.get(user);
   }
 
+  // sets up the session of the user via cookies services
   public setCookieUser(user: any) {
     this.cookieService.set( 'user', JSON.stringify(user));
     this.cookieService.set( 'permissions', user.permissions);
@@ -38,6 +41,7 @@ export class UsersService {
     this.cookieService.set( 'name', user.username);
   }
 
+  // return if the currently logged in user(if any) is an admin by examining each user's permissions
   public isAdmin() {
     let cookieUser = this.getUserFromCookies('user');
     if (cookieUser === undefined) {

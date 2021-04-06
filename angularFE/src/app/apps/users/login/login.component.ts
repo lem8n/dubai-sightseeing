@@ -26,11 +26,13 @@ export class LoginComponent implements OnInit {
     let username = this.username;
     let password = this.password;
 
+    // gets the users info
     let user = {
       username: username,
       password: password
     };
 
+    // call the login service with the user information
       this.usersService.logIn(user).subscribe(
         (response) => {
           this.usersService.setCookieUser(response);
@@ -42,7 +44,6 @@ export class LoginComponent implements OnInit {
         (error) => {
           this.loginError = true;
           setTimeout(() => {
-            this.spinner.hide();
             this.loginError = false;
           }, 3500);
           console.log('error: ', error);

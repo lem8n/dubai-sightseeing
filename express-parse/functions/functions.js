@@ -1,6 +1,5 @@
 const {
     getSights,
-    getSightById,
     updateSight
 } = require('./sights/sights');
 
@@ -13,6 +12,5 @@ module.exports = {
     logIn,
     logOut,
     getSights,
-    getSightById,
     updateSight
 }
