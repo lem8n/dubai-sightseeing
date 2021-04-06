@@ -2,6 +2,7 @@
 
 1. For the Front End execute the following commands
     - cd angularFE
+    - npm install
     - npm start
 2. Vital info    
     - localhost:4200 is the url you need to type for the site after it is built
@@ -21,6 +22,7 @@
 
 1. For the Back end execute the following commands
     - cd express-parse
+    - npm install
     - either nodemon index.js or npm start
 2. Vital Info
     - localhost:5000/dashboard is the url to access the parse dashboard
