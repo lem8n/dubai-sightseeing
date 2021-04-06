@@ -1,0 +1,27 @@
+<div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="h6-info">
+    <ul class="navbar-nav ml-auto align-items-center">
+
+
+        <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="btn btn-info-gradiant font-14" routerLink="/">
+                Home
+            </a>
+        </li>
+        <!-- <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="/about">
+                About
+            </a>
+        </li> -->
+        <li class="nav-item" *ngIf = "user === undefined">
+            <a class="btn btn-danger-gradiant font-14" (click)="loginClick()">
+                LogIn
+            </a>
+        </li>
+        <li class="nav-item" *ngIf = "user !== undefined">
+            <a class="btn btn-danger-gradiant font-14" (click)="logOut()">
+                LogOut
+            </a>
+        </li>
+    </ul>
+
+</div>

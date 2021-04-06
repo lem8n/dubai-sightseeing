@@ -1,0 +1,33 @@
+runtime: nodejs
+env: flex
+
+env_variables:
+  NODE_ENV: development
+
+  DB_URI: mongodb:mongodb+srv://lem8n:Takthefwt8%2a@cluster0.cilhx.mongodb.net/test?authSource=admin&replicaSet=atlas-4k3uzt-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+
+  APP_ID: NqqPKd9Mzzdk0Es6P7NdzXOXNb4tsqdq6Q8p0cZi
+  MASTER_KEY: WEwN5oQVcXNFpmDVgArtWqJUb8YtJIgFkE3dI4du
+  PUBLIC_SERVER_URL: http://localhost:5000/parse
+  FILE_KEY: 4be8-94b4-a8bc2177-8a21-3d51f7a7b2a5
+  SERVER_URL: http://localhost:5000/parse
+  SERVER_PORT: 5000
+
+  LOCAL_FILE_PATH: ../../../files
+  ABSOLUTE_FILE_PATH: /Users/me/files/
+
+  PHOTO_WIDTH: 250
+  PHOTO_HEIGHT: 250
+
+  APP_NAME: InstaShop
+  APP_USER: InstaShop
+  APP_PASS: password
+  # --REQUIRED--
+  # DATABASE_URI: mongodb://localhost:27017/dev
+  # APP_ID: <your-app-id>
+  # MASTER_KEY: <your-master-key>
+  # SERVER_URL: https://your-project-id.appspot.com/parse
+  # --OPTIONAL--
+  # FILE_KEY: <your-file-key>
+  # PARSE_MOUNT: /parse
+  # CLOUD_CODE_MAIN:  
