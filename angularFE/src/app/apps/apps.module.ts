@@ -8,14 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppsComponent } from './apps.component';
 import { BlogComponent } from './blog/blog.component';
-import { AboutComponent } from './about/about.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 
 import { SightsService } from './blog/blog-service.service';
-import { RelayOnComponent } from './about/About-Components/relay-on/relay-on.component';
-import { AchivementComponent } from './about/About-Components/achivement/achivement.component';
-import { TeamComponent } from './about/About-Components/team/team.component';
-import { TopContentComponent } from './about/About-Components/top-content/top-content.component';
 
 
 import { FullComponent } from './layout/full/full.component';
@@ -35,12 +30,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
   declarations: [
     AppsComponent,
     BlogComponent,
-    AboutComponent,
     BlogDetailComponent,
-    RelayOnComponent,
-    AchivementComponent,
-    TeamComponent,
-    TopContentComponent,
     FullComponent,
     BannerComponent,
     // BannerContentComponent,
