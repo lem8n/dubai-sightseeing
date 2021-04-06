@@ -3,6 +3,7 @@ import { SightsService } from '../blog-service.service';
 import { UsersService } from '../../users/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog-type';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import * as _ from 'lodash';
 
@@ -26,7 +27,7 @@ export class BlogDetailComponent implements OnInit {
   isImageSaved: boolean = false;
   cardImageBase64: string = '';
 
-  constructor(activatedRouter: ActivatedRoute, public sightsService: SightsService, public usersService: UsersService, public router: Router) {
+  constructor(activatedRouter: ActivatedRoute, public sightsService: SightsService, public usersService: UsersService, public router: Router, private spinner: NgxSpinnerService) {
     this.id = activatedRouter.snapshot.paramMap.get('id');
   }
 
@@ -63,6 +64,7 @@ export class BlogDetailComponent implements OnInit {
 
 
   updatePost() {
+    this.spinner.show();
       let sightDetails = {
         id: this.id,
         title: this.title,
@@ -74,6 +76,7 @@ export class BlogDetailComponent implements OnInit {
       this.sightsService.updatePost(sightDetails).subscribe(
         (response) => {
           console.log("Succesfull Update", response);
+          this.spinner.hide();
           location.assign('/');
         }
       );
@@ -90,7 +93,7 @@ export class BlogDetailComponent implements OnInit {
 
         if (fileInput.target.files[0].size > maxSize) {
             this.imageError =
-                'Maximum size allowed is ' + maxSize / 1000000 + 'MB';
+                'Maximum size allowed is 5MB';
 
             return false;
         }

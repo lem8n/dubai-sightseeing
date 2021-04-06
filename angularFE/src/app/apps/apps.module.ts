@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,6 +26,7 @@ import { BannerNavigationComponent } from './shared/banner-navigation/banner-nav
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './users/login/login.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -54,8 +55,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    NgxSpinnerModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [SightsService, CookieService],
 })
 export class AppsModule { }

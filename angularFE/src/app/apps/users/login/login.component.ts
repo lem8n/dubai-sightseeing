@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { UsersService } from '../users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,13 +15,14 @@ export class LoginComponent implements OnInit {
   password: string = '';
   loginError: boolean = false;
 
-  constructor(private usersService: UsersService, public router: Router) { }
+  constructor(private usersService: UsersService, public router: Router, private spinner: NgxSpinnerService) { }
 
 
   ngOnInit(): void {
   }
 
   logIn() {
+    this.spinner.show();
     let username = this.username;
     let password = this.password;
 
@@ -39,6 +42,7 @@ export class LoginComponent implements OnInit {
         (error) => {
           this.loginError = true;
           setTimeout(() => {
+            this.spinner.hide();
             this.loginError = false;
           }, 3500);
           console.log('error: ', error);

@@ -40,7 +40,7 @@ const updateSight = async (req, res) => {
         if (det !== 'photo') {
           sight.set(det, updatedSight[det]);
         } else if (det === 'photo' && updatedSight.photo !== null) {
-          const file = new Parse.File("mainPhoto.png", { base64: updatedSight[det] }, "image/png" || "image/jpeg");
+          const file = new Parse.File("mainPhoto-" + updatedSight.id + ".png", { base64: updatedSight[det] }, "image/png" || "image/jpeg");
           await file.save().then(
             (response) => {
               sight.set(det, response);
@@ -55,7 +55,7 @@ const updateSight = async (req, res) => {
               .resize(Number(process.env.PHOTO_WIDTH), Number(process.env.PHOTO_HEIGHT))
               .toBuffer();
 
-          const photoThumbnail = new Parse.File('thumbPhoto.png', { base64: newImageBuffer.toString('base64') }, "image/png" || "image/jpeg");
+          const photoThumbnail = new Parse.File("thumbPhoto-" + updatedSight.id + ".png", { base64: newImageBuffer.toString('base64') }, "image/png" || "image/jpeg");
           await photoThumbnail.save().then(
             (response) => {             
               sight.set("photoThumb", response);
